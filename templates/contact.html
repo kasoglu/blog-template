@@ -1,0 +1,36 @@
+{% set active_page = "contact" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% include "header.html" %}
+{% block content %}
+<!-- Page content-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1>Contact Me</h1>
+            <p class="lead">You can contact me via this form.</p>
+            {% if msg_sent: %}
+                <div class="alert alert-success" role="alert">Your message succesfully sent..</div>
+            {% else: %}
+            <form class="form form-horizontal" method="POST" role="form">
+
+                {{ wtf.form_errors(form, hiddens="only") }}
+
+                {{ wtf.form_field(form.name) }}
+                <br>
+                {{ wtf.form_field(form.email) }}
+                <br>
+                {{ wtf.form_field(form.subject) }}
+                <br>
+                {{ wtf.form_field(form.message, rows="10") }}
+                <br>
+                {{ wtf.form_field(form.submit, button_map={"submit": "primary"}) }}
+            </form>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+{% include "footer.html" %}
